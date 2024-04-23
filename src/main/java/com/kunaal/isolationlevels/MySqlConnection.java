@@ -2,6 +2,7 @@ package com.kunaal.isolationlevels;
 
 import com.kunaal.isolationlevels.dirtyread.Reader;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
@@ -15,10 +16,9 @@ public class MySqlConnection {
 	private static final String user = "root";
 	private static final String password = "root";
 
-	public MySqlConnection() {
-	}
+	private MySqlConnection() {}
 
-	public java.sql.Connection getConnection() {
+	public static Connection getConnection() {
 		try {
 			return DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
@@ -27,14 +27,13 @@ public class MySqlConnection {
 	}
 
 	public static void main(String[] args) throws SQLException, InterruptedException {
-		MySqlConnection mySqlConnection = new MySqlConnection();
 
 		ExecutorService executorService = Executors.newFixedThreadPool(10);
 		IntStream.rangeClosed(1, 10)
-				.mapToObj(value -> new Reader(mySqlConnection.getConnection()))
+				.mapToObj(value -> new Reader(MySqlConnection.getConnection()))
 				.forEach(executorService::execute);
 		executorService.shutdown();
 		executorService.awaitTermination(2, TimeUnit.SECONDS);
-		mySqlConnection.getConnection().close();
+		MySqlConnection.getConnection().close();
 	}
 }

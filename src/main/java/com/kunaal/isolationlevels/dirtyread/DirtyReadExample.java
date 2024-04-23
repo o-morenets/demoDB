@@ -11,10 +11,9 @@ import java.sql.SQLException;
 public class DirtyReadExample {
 
 	public static void main(String[] args) {
-		MySqlConnection conn = new MySqlConnection();
 
-		Connection connPayment = conn.getConnection();
-		Connection connReader = conn.getConnection();
+		Connection connPayment = MySqlConnection.getConnection();
+		Connection connReader = MySqlConnection.getConnection();
 		try {
 			connPayment.setAutoCommit(false);
 			connPayment.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);

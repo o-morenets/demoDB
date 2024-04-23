@@ -8,10 +8,9 @@ import java.sql.SQLException;
 public class PhantomReadExample {
 
 	public static void main(String[] args) {
-		MySqlConnection conn = new MySqlConnection();
 
-		Connection connInsert = conn.getConnection();
-		Connection connReader = conn.getConnection();
+		Connection connInsert = MySqlConnection.getConnection();
+		Connection connReader = MySqlConnection.getConnection();
 		try {
 			connInsert.setAutoCommit(false);
 			connInsert.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);

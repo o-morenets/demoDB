@@ -8,10 +8,9 @@ import java.sql.SQLException;
 public class NonRepeatableExample {
 
 	public static void main(String[] args) {
-		MySqlConnection conn = new MySqlConnection();
 
-		Connection connUpdater = conn.getConnection();
-		Connection connReader = conn.getConnection();
+		Connection connUpdater = MySqlConnection.getConnection();
+		Connection connReader = MySqlConnection.getConnection();
 		try {
 			connUpdater.setAutoCommit(false);
 			connUpdater.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
