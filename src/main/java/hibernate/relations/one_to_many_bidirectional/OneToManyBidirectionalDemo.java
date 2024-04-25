@@ -1,7 +1,6 @@
 package hibernate.relations.one_to_many_bidirectional;
 
 import hibernate.EntityManagerUtils;
-import hibernate.relations.one_to_many_unidirectional.Person;
 
 public class OneToManyBidirectionalDemo {
 
@@ -67,7 +66,7 @@ public class OneToManyBidirectionalDemo {
 		EntityManagerUtils.doInPersistentContext(em -> {
 
 //			String selectString = "from Customer"; // N+1
-			String selectString = "from Customer c left join fetch c.orders"; // fix N+1
+			String selectString = "select distinct c from Customer c left join fetch c.orders"; // fix N+1
 
 			em.createQuery(selectString, Customer.class)
 					.getResultList()
