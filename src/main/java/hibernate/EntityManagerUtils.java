@@ -21,8 +21,4 @@ public class EntityManagerUtils {
 			em.getTransaction().rollback();
 		}
 	}
-
-	public static void main(String[] args) {
-		// only for creation/update of tables
-	}
 }
