@@ -11,5 +11,5 @@ public class Film {
 
     @Id
     @Column(name = "film_id")
-    private int id;
+    private short id;
 }

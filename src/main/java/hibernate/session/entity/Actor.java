@@ -13,7 +13,7 @@ public class Actor {
 
     @Id
     @Column(name = "actor_id")
-    private int id;
+    private short id;
 
     @Column(name = "first_name")
     private String firstName;
