@@ -9,7 +9,7 @@ public class InheritanceDemo {
 
 	public static void main(String[] args) {
 
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 
 			Animal animalPet = new Pet();
 			animalPet.setColor(Color.GRAY);

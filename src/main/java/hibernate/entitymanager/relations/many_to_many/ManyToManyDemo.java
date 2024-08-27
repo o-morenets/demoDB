@@ -5,7 +5,7 @@ import hibernate.entitymanager.EntityManagerUtils;
 public class ManyToManyDemo {
 
 	public static void main(String[] args) {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			Employee employee1 = new Employee();
 			employee1.setFirstName("Genry");
 			employee1.setLastName("Ford");
@@ -23,7 +23,7 @@ public class ManyToManyDemo {
 		});
 
 		// add new Employee to existing Guild
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			Guild guild = em.find(Guild.class, 1L);
 
 			Employee empSamantaFox = new Employee();
@@ -33,7 +33,7 @@ public class ManyToManyDemo {
 		});
 
 		// add new Guild to existing Employee
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			Employee employee = em.find(Employee.class, 2L);
 
 			Guild guild = new Guild();

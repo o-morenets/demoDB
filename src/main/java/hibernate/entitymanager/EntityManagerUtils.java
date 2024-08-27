@@ -10,7 +10,7 @@ public class EntityManagerUtils {
 
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
 
-	public static void doInPersistentContext(Consumer<EntityManager> entityManagerConsumer) {
+	public static void doInEntityManagerPersistentContext(Consumer<EntityManager> entityManagerConsumer) {
 		EntityManager em = emf.createEntityManager();
 		try (em) {
 			em.getTransaction().begin();

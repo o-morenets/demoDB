@@ -12,15 +12,15 @@ import lombok.ToString;
 @EqualsAndHashCode(exclude = "customer")
 public class Order {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String description;
+    private String description;
 
-	private Double amount;
+    private Double amount;
 
-	@ManyToOne
-	@JoinColumn(name = "cust_id")
-	private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "cust_id")
+    private Customer customer;
 }

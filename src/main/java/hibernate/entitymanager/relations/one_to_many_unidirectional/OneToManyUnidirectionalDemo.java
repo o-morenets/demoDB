@@ -21,7 +21,7 @@ public class OneToManyUnidirectionalDemo {
 	}
 
 	private static void persistPersonWithNotes() {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			Person person = new Person();
 			person.setFirstName("John");
 			person.setLastName("Bush");
@@ -42,7 +42,7 @@ public class OneToManyUnidirectionalDemo {
 	}
 
 	private static void orphanRemovalDemo() {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			Person person = new Person();
 			person.setFirstName("Orphan");
 			person.setLastName("Orphan");
@@ -67,7 +67,7 @@ public class OneToManyUnidirectionalDemo {
 	}
 
 	private static void selectFromPersonNplusOneProblem() {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			String selectString = "from Person p"; // N+1
 //			String selectString = "from Person p left join fetch p.notes"; // fix N+1
 

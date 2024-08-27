@@ -14,7 +14,7 @@ public class OneToOneDemo {
 	}
 
 	private static void insertUserWithAddress() {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			User user = new User();
 			user.setFirstName("Garry");
 			user.setLastName("Moore");
@@ -31,7 +31,7 @@ public class OneToOneDemo {
 	}
 
 	private static void insertUserWithProfile() {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			User user = new User();
 			user.setFirstName("John");
 			user.setLastName("Lennon");
@@ -73,7 +73,7 @@ public class OneToOneDemo {
 	}
 
 	private static void insertUserWithElementCollection() {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			User user = new User();
 			user.setFirstName("Martin");
 			user.setLastName("Wood");

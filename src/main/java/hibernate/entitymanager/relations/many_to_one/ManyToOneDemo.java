@@ -5,7 +5,7 @@ import hibernate.entitymanager.EntityManagerUtils;
 public class ManyToOneDemo {
 
 	public static void main(String[] args) {
-		EntityManagerUtils.doInPersistentContext(em -> {
+		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			Address address = new Address();
 			address.setStreet("Nova");
 			address.setZip(99999);
