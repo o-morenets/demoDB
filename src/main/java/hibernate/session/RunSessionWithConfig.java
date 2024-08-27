@@ -2,35 +2,23 @@ package hibernate.session;
 
 import hibernate.session.entity.Actor;
 import hibernate.session.entity.Film;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 public class RunSessionWithConfig {
 
-	public static void main(String[] args) {
-		SessionFactory sessionFactory = new Configuration()
-				.configure()
-				.addAnnotatedClass(Actor.class)
-				.buildSessionFactory();
+    public static void main(String[] args) {
+        HibernateSessionUtils.doInHibernateSessionSakila(session -> {
+            Film film = session.get(Film.class, 17);
+            System.out.println(film);
+            Film nonExistingFilm = session.get(Film.class, 12345); // no Exception, just returns null
+            System.out.println(nonExistingFilm);
 
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+            Actor actor = new Actor();
+            session.load(actor, 17);
+            System.out.println(actor);
 
-		Film film = session.get(Film.class, 17);
-		System.out.println(film);
-		Film nonExistingFilm = session.get(Film.class, 170000);
-		System.out.println(nonExistingFilm);
-
-		Actor actor = new Actor();
-		session.load(actor, 17);
-		System.out.println(actor);
-
-		Actor nonExistingActor = new Actor();
-//		session.load(nonExistingActor, 170000); // throws org.hibernate.ObjectNotFoundException
-		System.out.println(nonExistingActor);
-
-		session.getTransaction().commit();
-		session.close();
-	}
+            Actor nonExistingActor = new Actor();
+//            session.load(nonExistingActor, 12345); // throws org.hibernate.ObjectNotFoundException
+            System.out.println(nonExistingActor);
+        });
+    }
 }
