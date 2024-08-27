@@ -30,6 +30,7 @@ public class HibernateSessionUtils {
         } catch (Exception e) {
             session.getTransaction().rollback();
         }
+        session.close();
     }
 
     public static void doInHibernateSessionTestDB(Consumer<Session> sessionConsumer) {
@@ -40,7 +41,7 @@ public class HibernateSessionUtils {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
-            session.close();
         }
+        session.close();
     }
 }
