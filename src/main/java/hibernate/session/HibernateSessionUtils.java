@@ -12,11 +12,12 @@ import java.util.function.Consumer;
 public class HibernateSessionUtils {
 
     private static final SessionFactory sakilaSessionFactory = new Configuration()
-            .configure()
+            .configure() // use hibernate.cfg.xml for configuration
             .addAnnotatedClass(Actor.class) // class Film added in configuration file (hibernate.cfg.xml)
             .buildSessionFactory();
 
     private static final SessionFactory testDbSessionFactory = new Configuration()
+            // here we don't use configure(), so hibernate.properties file is used for configuration
             .addAnnotatedClass(Customer.class)
             .addAnnotatedClass(Order.class)
             .buildSessionFactory();
