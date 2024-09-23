@@ -1,4 +1,4 @@
-package com.kunaal.isolationlevels.phantomread;
+package jdbc.isolation_levels.phantomread;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

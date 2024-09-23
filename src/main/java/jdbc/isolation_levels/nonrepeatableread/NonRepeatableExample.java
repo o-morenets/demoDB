@@ -1,6 +1,6 @@
-package com.kunaal.isolationlevels.nonrepeatableread;
+package jdbc.isolation_levels.nonrepeatableread;
 
-import jdbc.MySqlConnection;
+import jdbc.isolation_levels.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,6 +1,6 @@
-package com.kunaal.isolationlevels.dirtyread;
+package jdbc.isolation_levels.dirtyread;
 
-import jdbc.MySqlConnection;
+import jdbc.isolation_levels.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

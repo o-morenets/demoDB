@@ -1,4 +1,4 @@
-package jdbc;
+package jdbc.isolation_levels;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

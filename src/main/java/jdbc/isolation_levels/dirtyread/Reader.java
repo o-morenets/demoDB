@@ -1,4 +1,4 @@
-package com.kunaal.isolationlevels.dirtyread;
+package jdbc.isolation_levels.dirtyread;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,6 +1,6 @@
-package com.kunaal.isolationlevels.phantomread;
+package jdbc.isolation_levels.phantomread;
 
-import jdbc.MySqlConnection;
+import jdbc.isolation_levels.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

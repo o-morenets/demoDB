@@ -1,4 +1,4 @@
-package com.kunaal.isolationlevels.nonrepeatableread;
+package jdbc.isolation_levels.nonrepeatableread;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
