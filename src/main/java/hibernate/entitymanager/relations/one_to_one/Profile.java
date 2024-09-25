@@ -9,7 +9,8 @@ import lombok.Data;
 public class Profile {
 
 	@Id
-//	@GeneratedValue // don't need it as we will use User's id. Instead, we use @MapsId on User field
+//	@GeneratedValue // don't need it as we will use User's id. The primary key of Profile is automatically set from the User entity.
+	//	We use @MapsId on User field
 	private Long id;
 
 	private boolean active;
