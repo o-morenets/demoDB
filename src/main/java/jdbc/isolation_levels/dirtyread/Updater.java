@@ -7,13 +7,13 @@ import java.sql.SQLException;
 /**
  * @author Kunaal A Trehan
  */
-public class Payment implements Runnable {
+public class Updater implements Runnable {
 
     private final Connection conn;
 
     private static final String QUERY = "update `my-examples`.accountbalance set acctBalance = acctBalance - 10 where id = 1";
 
-    public Payment(Connection conn) {
+    public Updater(Connection conn) {
         this.conn = conn;
     }
 

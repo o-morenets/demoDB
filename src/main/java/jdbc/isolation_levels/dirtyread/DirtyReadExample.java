@@ -4,6 +4,7 @@ import jdbc.isolation_levels.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.concurrent.Executor;
 
 /**
  * @author Kunaal A Trehan
@@ -16,7 +17,7 @@ public class DirtyReadExample {
 		Connection connReader = MySqlConnection.getConnection();
 		try {
 			connPayment.setAutoCommit(false);
-			connPayment.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+			connPayment.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED); // can be any isolation level
 
 			connReader.setAutoCommit(false);
 			connReader.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
@@ -26,7 +27,7 @@ public class DirtyReadExample {
 		}
 
 
-		Thread paymentThread = new Thread(new Payment(connPayment));
+		Thread paymentThread = new Thread(new Updater(connPayment));
 		Thread readerThread = new Thread(new Reader(connReader));
 
 		paymentThread.start();

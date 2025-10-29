@@ -13,7 +13,7 @@ public class PhantomReadExample {
 		Connection connReader = MySqlConnection.getConnection();
 		try {
 			connInsert.setAutoCommit(false);
-			connInsert.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			connInsert.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED); // can be any isolation level
 
 			connReader.setAutoCommit(false);
 //			connReader.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);

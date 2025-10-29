@@ -13,7 +13,7 @@ public class NonRepeatableExample {
 		Connection connReader = MySqlConnection.getConnection();
 		try {
 			connUpdater.setAutoCommit(false);
-			connUpdater.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			connUpdater.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED); // can be any isolation level
 
 			connReader.setAutoCommit(false);
 			connReader.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
