@@ -7,10 +7,10 @@ import lombok.Setter;
 import java.awt.*;
 
 //@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
-@MappedSuperclass
 public abstract class Animal {
 
 	@Id

@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.3</version>
+            <version>42.7.5</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -43,11 +43,14 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>10.20.1</version>
+                <version>9.22.3</version>
                 <configuration>
-                    <url>jdbc:postgresql://localhost:5433/high_load</url>
+                    <url>jdbc:postgresql://localhost:5433/postgres</url>
                     <user>postgres</user>
                     <password>postgres</password>
+                    <schemas>
+                        <schema>high_load</schema>
+                    </schemas>
                 </configuration>
             </plugin>
         </plugins>

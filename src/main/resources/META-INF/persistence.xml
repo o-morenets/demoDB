@@ -4,11 +4,9 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="default">
-        <class>hibernate.relations.one_to_many_unidirectional.Note</class>
-        <class>hibernate.relations.one_to_many_unidirectional.Person</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5433/postgres"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5433/postgres"/>
             <property name="hibernate.connection.username" value="postgres"/>
             <property name="hibernate.connection.password" value="postgres"/>
             <property name="hibernate.show_sql" value="true"/>

@@ -30,7 +30,7 @@ public class InheritanceDemo {
 			em.persist(petDog);
 
 			Dog dog = new Dog();
-			dog.setAge((byte) 5);
+			dog.setAge((byte) 7);
 			dog.setName("My Dog");
 			dog.getDogCompetitions().addAll(List.of("Dog Award 2011", "IEAD-54"));
 			em.persist(dog);
