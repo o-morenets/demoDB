@@ -1,6 +1,6 @@
 # demoDB
 
-Run `docker compose up` - creates mySql and Postgres DB containers with Adminer tool.
+Run `docker compose up` - it creates mySql and Postgres DB containers with Adminer tool.
 
 ### DB MySQL: `jdbc:mysql://localhost:3306`
 
@@ -10,7 +10,7 @@ Run `docker compose up` - creates mySql and Postgres DB containers with Adminer 
 - `jdbc:mysql://localhost:3306/test_db` - see `hibernate.properties` - used in `hibernate.session.HibernateSessionUtils`
 
 
-## 🦾High load DB Simulation:
+## 🦾 High load DB Simulation:
 ### `jdbc:postgresql://localhost:5433/postgres?currentSchema=high_load`
 
 - run `mvn flyway:migrate`
@@ -22,5 +22,7 @@ Run `docker compose up` - creates mySql and Postgres DB containers with Adminer 
 ## Inheritance Demo
 ### `jdbc:postgresql://localhost:5433/postgres`
 
-- run [InheritanceDemo](src/main/java/hibernate/entitymanager/inheritance/InheritanceDemo.java) (it creates several tables for entities)
+- run [InheritanceDemo](src/main/java/hibernate/entitymanager/inheritance/InheritanceDemo.java)
+  - uses [persistence.xml](src/main/resources/META-INF/persistence.xml)
+  - creates several tables in schema `public`
 

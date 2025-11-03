@@ -8,7 +8,7 @@ import java.awt.*;
 
 //@Entity
 //@Inheritance(strategy = InheritanceType.JOINED)
-@MappedSuperclass
+@MappedSuperclass // entity is not created, only common fields used
 @Getter
 @Setter
 public abstract class Animal {
