@@ -25,8 +25,7 @@ public class Reader implements Runnable {
 		try (PreparedStatement stmt = conn.prepareStatement(QUERY)) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				System.out.println("Employee details: " + rs.getInt(1) + " - " + rs.getString(2) + " - " +
-						rs.getString(3) + " - " + rs.getString(4));
+				System.out.println("Employee details: " + rs.getInt(1) + " - " + rs.getString(2));
 			}
 
 			Thread.sleep(3000);
@@ -35,8 +34,7 @@ public class Reader implements Runnable {
 
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				System.out.println("Employee details: " + rs.getInt(1) + " - " + rs.getString(2) + " - " +
-						rs.getString(3) + " - " + rs.getString(4));
+				System.out.println("Employee details: " + rs.getInt(1) + " - " + rs.getString(2));
 			}
 
 			rs.close();

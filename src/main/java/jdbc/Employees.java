@@ -25,20 +25,20 @@ public class Employees {
     }
 
     public static void main(String[] args) throws SQLException, InterruptedException {
-        ExecutorService executor = Executors.newFixedThreadPool(100);
+        ExecutorService es = Executors.newFixedThreadPool(100);
 
         Connection connection = getConnection();
 
         IntStream.range(0, 100)
-                .forEach(i -> executor.execute(query(
+                .forEach(i -> es.execute(query(
 //                        getConnection() // one connection per thread
                         connection // one connection shared with all threads
                 )));
 
         System.out.println("shutting down...");
-        executor.shutdown();
+        es.shutdown();
 
-        while (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
+        while (!es.awaitTermination(10, TimeUnit.SECONDS)) {
             System.out.println("still querying...");
         }
 
