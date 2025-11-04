@@ -39,7 +39,7 @@ services:
   adminer:
     image: adminer
     ports:
-      - "8007:8080"
+      - "8090:8080"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
