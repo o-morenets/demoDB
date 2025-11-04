@@ -1,28 +1,14 @@
 package jdbc;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
+import static jdbc.isolation_levels.MySqlConnection.getConnection;
+
 public class Employees {
-
-    private static final String url = "jdbc:mysql://localhost:3306/employees?serverTimezone=UTC&useSSL=false";
-    private static final String user = "root";
-    private static final String password = "root";
-
-    private Employees() {
-    }
-
-    public static Connection getConnection() {
-        try {
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         ExecutorService es = Executors.newFixedThreadPool(100);
