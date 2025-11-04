@@ -1,6 +1,6 @@
 package jdbc.isolation_levels.nonrepeatableread;
 
-import jdbc.isolation_levels.MySqlConnection;
+import jdbc.utils.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

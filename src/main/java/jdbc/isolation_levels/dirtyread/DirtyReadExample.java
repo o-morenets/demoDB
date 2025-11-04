@@ -1,10 +1,9 @@
 package jdbc.isolation_levels.dirtyread;
 
-import jdbc.isolation_levels.MySqlConnection;
+import jdbc.utils.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.concurrent.Executor;
 
 /**
  * @author Kunaal A Trehan

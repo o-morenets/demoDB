@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
-import static jdbc.isolation_levels.MySqlConnection.getConnection;
+import static jdbc.utils.MySqlConnection.getConnection;
 
 public class Employees {
 
