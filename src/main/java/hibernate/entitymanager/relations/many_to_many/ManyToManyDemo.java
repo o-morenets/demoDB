@@ -5,6 +5,7 @@ import hibernate.entitymanager.EntityManagerUtils;
 public class ManyToManyDemo {
 
 	public static void main(String[] args) {
+
 		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
 			Employee employee1 = new Employee();
 			employee1.setFirstName("Genry");

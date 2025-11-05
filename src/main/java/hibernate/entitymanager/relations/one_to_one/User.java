@@ -31,7 +31,6 @@ public class User {
 	private Message message;
 
 	@OneToOne
-//	@MapsId
 	private Photo photo;
 
 	@ElementCollection

@@ -7,12 +7,12 @@
     <groupId>com.example</groupId>
     <artifactId>demoDB</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>demo1</name>
+    <name>demoDb</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
     </properties>
 
     <dependencies>
@@ -36,6 +36,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>11.3.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -43,9 +50,9 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>9.22.3</version>
+                <version>11.3.4</version>
                 <configuration>
-                    <url>jdbc:postgresql://localhost:5433/postgres</url>
+                    <url>jdbc:postgresql://localhost:5432/postgres</url>
                     <user>postgres</user>
                     <password>postgres</password>
                     <schemas>
@@ -53,6 +60,7 @@
                     </schemas>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

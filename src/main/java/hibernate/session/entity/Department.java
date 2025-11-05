@@ -8,10 +8,13 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "film")
-public class Film {
+@Table(name = "departments")
+public class Department {
 
     @Id
-    @Column(name = "film_id")
-    private short id;
+    @Column(name = "dept_no", length = 4)
+    private String id;
+
+    @Column(name = "dept_name")
+    private String name;
 }

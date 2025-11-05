@@ -34,9 +34,9 @@ public class Employees {
     private static Runnable query(Connection conn) {
         return () -> {
             String QUERY = """
-                    select * from employees e
-                    left join salaries s on s.emp_no = e.emp_no
-                    left join titles t on t.emp_no = e.emp_no
+                    select * from employees.employees e
+                    left join employees.salaries s on s.emp_no = e.emp_no
+                    left join employees.titles t on t.emp_no = e.emp_no
                     where e.hire_date between '1999-08-15' and '1999-08-17'
                     """;
 
