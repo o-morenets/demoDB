@@ -6,6 +6,7 @@ import hibernate.session.entity.Film;
 public class RunSessionWithConfig {
 
     public static void main(String[] args) {
+
         HibernateSessionUtils.doInHibernateSessionSakila(session -> {
             Film film = session.get(Film.class, 17);
             System.out.println("film = " + film);

@@ -1,14 +1,20 @@
 # demoDB
 
-Run `docker compose up` - it creates mySql and Postgres DB containers with Adminer tool.
+Run `docker compose up` - it creates mySql and Postgres DB containers with Adminer tool
 
-### DB MySQL: `jdbc:mysql://localhost:3306`
+### DB MySQL
 
-- `jdbc:mysql://localhost:3306/employees` - see `jdbc.Employees`
-- `jdbc:mysql://localhost:3306/my-examples` - ISOLATION LEVELS
-- `jdbc:mysql://localhost:3306/sakila` - see `hibernate.cfg.xml` - used in `hibernate.session.HibernateSessionUtils`
-- `jdbc:mysql://localhost:3306/test_db` - see `hibernate.properties` - used in `hibernate.session.HibernateSessionUtils`
+- `jdbc:mysql://localhost:3306/my-examples` - ISOLATION LEVELS // TODO use another db, say `sakila`
+- `jdbc:mysql://localhost:3306/sakila` - see `hibernate.cfg.xml` - used in `hibernate.session.HibernateSessionUtils` // 
+- `jdbc:mysql://localhost:3306/test_db` - see `hibernate.properties` - used in `hibernate.session.HibernateSessionUtils` // 
 
+
+## Simultaneous DB access
+### `jdbc:mysql://localhost:3306/employees`
+
+- run [Employees.java](src/main/java/jdbc/Employees.java)
+  - creates ans starts 100 threads
+  - each thread runs SQL query: fetch Employees
 
 ## 🦾 High load DB Simulation:
 ### `jdbc:postgresql://localhost:5433/postgres?currentSchema=high_load`
