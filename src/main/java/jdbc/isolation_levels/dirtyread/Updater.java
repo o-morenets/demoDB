@@ -3,6 +3,7 @@ package jdbc.isolation_levels.dirtyread;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kunaal A Trehan
@@ -11,7 +12,7 @@ public class Updater implements Runnable {
 
     private final Connection conn;
 
-    private static final String QUERY = "update `my-examples`.accountbalance set acctBalance = acctBalance - 10 where id = 1";
+    private static final String QUERY = "update accounts set balance = balance - 10 where id = 1";
 
     public Updater(Connection conn) {
         this.conn = conn;
@@ -23,7 +24,7 @@ public class Updater implements Runnable {
             System.out.println(Thread.currentThread().getName() + " - updating balance...");
             stmt.execute();
             System.out.println(Thread.currentThread().getName() + " - updated balance, sleep for 3 sec...");
-            Thread.sleep(3000);
+            TimeUnit.SECONDS.sleep(3);
             System.out.println(Thread.currentThread().getName() + " - awoken");
             conn.rollback();
             System.out.println(Thread.currentThread().getName() + " - ROLLED BACK.");

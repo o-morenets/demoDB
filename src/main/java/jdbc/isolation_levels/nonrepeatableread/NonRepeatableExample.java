@@ -3,11 +3,12 @@ package jdbc.isolation_levels.nonrepeatableread;
 import jdbc.utils.MySqlConnection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class NonRepeatableExample {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		Connection connUpdater = MySqlConnection.getConnection();
 		Connection connReader = MySqlConnection.getConnection();
@@ -22,7 +23,21 @@ public class NonRepeatableExample {
 			throw new RuntimeException(e);
 		}
 
-		new Thread(new Reader(connReader)).start();
-		new Thread(new Updater(connUpdater)).start();
+        Thread reader = new Thread(new Reader(connReader));
+        Thread updater = new Thread(new Updater(connUpdater));
+        reader.start();
+        updater.start();
+        reader.join();
+        updater.join();
+
+        // restore the previous value of an account type
+        System.out.println("Restoring the previous value of an account type...");
+        Connection connection = MySqlConnection.getConnection();
+        try (PreparedStatement stmt = connection.prepareStatement("update accounts set type = 'DEPOSIT' where id = 1")) {
+            stmt.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 	}
 }

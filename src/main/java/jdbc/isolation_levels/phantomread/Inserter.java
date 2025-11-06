@@ -11,7 +11,7 @@ public class Inserter implements Runnable {
 
 	private final Connection conn;
 
-	private static final String QUERY = "insert into `my-examples`.employee VALUES (default,?)";
+	private static final String QUERY = "insert into accounts VALUES (default,?,?)";
 
 	public Inserter(Connection conn) {
 		this.conn = conn;
@@ -21,7 +21,8 @@ public class Inserter implements Runnable {
 	public void run() {
 		System.out.println("Inserting values...");
 		try (PreparedStatement stmt = conn.prepareStatement(QUERY)) {
-			stmt.setString(1, "INDIA");
+            stmt.setString(1, "CHECKING");
+            stmt.setDouble(2, 5000.00d);
 
 			stmt.execute();
 			conn.commit();

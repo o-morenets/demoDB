@@ -11,7 +11,7 @@ public class Updater implements Runnable {
 
 	private final Connection conn;
 
-	private static final String QUERY = "update `my-examples`.employee set empCtry = 'USA' where id = 1";
+	private static final String QUERY = "update accounts set type = '**SAVING**' where id = 1";
 
 	public Updater(Connection conn) {
 		this.conn = conn;
