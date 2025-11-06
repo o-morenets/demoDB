@@ -10,6 +10,7 @@ services:
       MYSQL_DATABASE: isolation_levels
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./mysql:/docker-entrypoint-initdb.d
     command: --default-authentication-plugin=mysql_native_password
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
@@ -32,16 +33,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
-  # ---------- ADMINER ----------
-  adminer:
-    image: adminer
-    ports:
-      - "8099:8080"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    depends_on:
-      - mysql
 
 volumes:
   mysql-data:

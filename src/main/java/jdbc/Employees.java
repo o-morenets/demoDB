@@ -1,12 +1,15 @@
 package jdbc;
 
+import lombok.SneakyThrows;
+
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
-
-import static jdbc.utils.MySqlConnection.getConnection;
 
 public class Employees {
 
@@ -29,6 +32,15 @@ public class Employees {
         }
 
         connection.close();
+    }
+
+    @SneakyThrows
+    private static Connection getConnection() {
+        String url = "jdbc:mysql://localhost:3306/employees";
+        String user = "root";
+        String password = "root";
+
+        return DriverManager.getConnection(url, user, password);
     }
 
     private static Runnable query(Connection conn) {

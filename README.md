@@ -2,10 +2,20 @@
 
 Prerequisites:
 - JDK 21+
-- Docker
 - Docker Compose
+- test_db (separate project) with two databases: `employees` and `sakila`
+  - run `docker compose up -d` from `test_db` project to start DB containers (starts MySQL with the above databases and Adminer tool)
 
-Run `docker compose up` - it creates `MySQL` and `PostgreSQL` DB containers with `Adminer` tool
+Run `docker compose up` - creates `MySQL` (port:`3307`) and `PostgreSQL` (potr:`5433`) DB containers
+
+
+## Simultaneous DB access
+
+### `jdbc:mysql://localhost:3306/employees`
+
+#### [Employees.java](src/main/java/jdbc/Employees.java)
+- creates and starts 100 threads
+- each thread runs SQL query: fetch Employees
 
 
 ## DB data sources
@@ -18,18 +28,16 @@ Run `docker compose up` - it creates `MySQL` and `PostgreSQL` DB containers with
 - demonstrates how to create DB connection using `hibernate.cfg.xml` and `hibernate.properties`
 - used databases: `Sakila` and `Employees`
 
+
 ## Transaction isolation levels
-> TODO
-### `jdbc:mysql://localhost:3306/my-examples` - ISOLATION LEVELS // TODO use another db, say `sakila`
 
+### `jdbc:mysql://localhost:3307/isolation-levels`
 
-## Simultaneous DB access
+#### [Dirty Read](src/main/java/jdbc/isolation_levels/dirtyread/DirtyReadExample.java)
 
-### `jdbc:mysql://localhost:3306/employees`
+#### [Non-Repeatable Read](src/main/java/jdbc/isolation_levels/nonrepeatableread/NonRepeatableReadExample.java)
 
-#### [Employees.java](src/main/java/jdbc/Employees.java)
-- creates ans starts 100 threads
-- each thread runs SQL query: fetch Employees
+#### [Phantom Read](src/main/java/jdbc/isolation_levels/phantomread/PhantomReadExample.java)
 
 
 ## 🦾 High load DB Simulation:

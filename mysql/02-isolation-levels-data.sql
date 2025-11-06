@@ -1,0 +1,1 @@
+INSERT INTO accounts VALUES (1, 'DEPOSIT', 100.00);
