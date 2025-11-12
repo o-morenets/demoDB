@@ -42,7 +42,7 @@ Run `docker compose up` - creates `MySQL` (port:`3307`) and `PostgreSQL` (potr:`
 
 ## 🦾 High load DB Simulation:
 
-### `jdbc:postgresql://localhost:5432/postgres`
+### `jdbc:postgresql://localhost:5433/postgres`
 
 #### [DbHighLoadSimulator](src/main/java/db_high_load/DbHighLoadSimulator.java)
 - executes db migration script [V1__create_high_load_schema](src/main/resources/db/migration/V1__create_high_load_schema.sql)
@@ -56,7 +56,7 @@ Run `docker compose up` - creates `MySQL` (port:`3307`) and `PostgreSQL` (potr:`
 
 ## Inheritance Demo
 
-### `jdbc:postgresql://localhost:5432/postgres` - uses [persistence.xml](src/main/resources/META-INF/persistence.xml)
+### `jdbc:postgresql://localhost:5433/postgres` - uses [persistence.xml](src/main/resources/META-INF/persistence.xml)
 
 #### [InheritanceDemo](src/main/java/hibernate/entitymanager/inheritance/InheritanceDemo.java)
 - creates several tables annotated with `@Entity` in schema `public`
@@ -64,7 +64,7 @@ Run `docker compose up` - creates `MySQL` (port:`3307`) and `PostgreSQL` (potr:`
 
 ## Relations Demo
 
-### `jdbc:postgresql://localhost:5432/postgres` - uses [persistence.xml](src/main/resources/META-INF/persistence.xml)
+### `jdbc:postgresql://localhost:5433/postgres` - uses [persistence.xml](src/main/resources/META-INF/persistence.xml)
 
 #### [ManyToManyDemo](src/main/java/hibernate/entitymanager/relations/many_to_many/ManyToManyDemo.java)
 - used entities: `Employee`, `Guild`

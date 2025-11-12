@@ -24,8 +24,8 @@ public class HibernateSessionUtils {
             sessionConsumer.accept(session);
             session.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             session.getTransaction().rollback();
+            throw e;
         } finally {
             session.close();
         }
@@ -45,8 +45,8 @@ public class HibernateSessionUtils {
             sessionConsumer.accept(session);
             session.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             session.getTransaction().rollback();
+            throw e;
         } finally {
             session.close();
         }

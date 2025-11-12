@@ -17,8 +17,11 @@ public class EntityManagerUtils {
 			entityManagerConsumer.accept(em);
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
 			em.getTransaction().rollback();
-		}
+            throw e;
+        } finally {
+            em.close();
+        }
+        emf.close();
 	}
 }

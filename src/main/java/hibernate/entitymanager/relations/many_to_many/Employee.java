@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "emp")
 @Data
 @NoArgsConstructor
 public class Employee {
@@ -24,7 +24,7 @@ public class Employee {
 
 	@Setter(AccessLevel.PRIVATE)
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "employee_guilds",
+	@JoinTable(name = "emp_guilds",
 			joinColumns = @JoinColumn(name = "employee_id"),
 			inverseJoinColumns = @JoinColumn(name = "guild_id"))
 	private List<Guild> guilds = new ArrayList<>();

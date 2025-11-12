@@ -11,7 +11,7 @@ public class DbHighLoadSimulator {
 
     private static final int THREAD_COUNT = 300;
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5433/postgres";
     private static final String DB_USER = "postgres";
     private static final String DB_PASSWORD = "postgres";
 
