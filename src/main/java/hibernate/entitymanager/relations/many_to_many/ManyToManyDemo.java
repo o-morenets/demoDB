@@ -1,12 +1,13 @@
 package hibernate.entitymanager.relations.many_to_many;
 
-import hibernate.entitymanager.EntityManagerUtils;
+
+import hibernate.entitymanager.relations.EntityManagerUtilsRelations;
 
 public class ManyToManyDemo {
 
 	public static void main(String[] args) {
 
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			Employee employee1 = new Employee();
 			employee1.setFirstName("Genry");
 			employee1.setLastName("Ford");
@@ -24,7 +25,7 @@ public class ManyToManyDemo {
 		});
 
 		// add new Employee to existing Guild
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			Guild guild = em.find(Guild.class, 1L);
 
 			Employee empSamantaFox = new Employee();
@@ -34,7 +35,7 @@ public class ManyToManyDemo {
 		});
 
 		// add new Guild to existing Employee
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			Employee employee = em.find(Employee.class, 2L);
 
 			Guild guild = new Guild();

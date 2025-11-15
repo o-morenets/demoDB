@@ -1,6 +1,6 @@
 package hibernate.entitymanager.relations.one_to_many_bidirectional;
 
-import hibernate.entitymanager.EntityManagerUtils;
+import hibernate.entitymanager.relations.EntityManagerUtilsRelations;
 
 public class OneToManyBidirectionalDemo {
 
@@ -14,7 +14,7 @@ public class OneToManyBidirectionalDemo {
      * Bidirectional (Order "knows" about Customer)
      */
     private static void insertCustomerWithOrdersPostgres() {
-        EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
             Customer customer1 = new Customer();
             customer1.setName("Customer 1");
             em.persist(customer1);
@@ -63,7 +63,7 @@ public class OneToManyBidirectionalDemo {
     }
 
     private static void selectFromPersonNplusOneProblem() {
-        EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 
 //			String selectString = "from Customer"; // N+1
             String selectString = "select distinct c from Customer c left join fetch c.orders"; // fix N+1

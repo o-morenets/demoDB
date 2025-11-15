@@ -1,6 +1,6 @@
 package hibernate.entitymanager.relations.one_to_many_unidirectional;
 
-import hibernate.entitymanager.EntityManagerUtils;
+import hibernate.entitymanager.relations.EntityManagerUtilsRelations;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +21,7 @@ public class OneToManyUnidirectionalDemo {
 	}
 
 	private static void persistPersonWithNotes() {
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			Person person = new Person();
 			person.setFirstName("John");
 			person.setLastName("Bush");
@@ -42,7 +42,7 @@ public class OneToManyUnidirectionalDemo {
 	}
 
 	private static void orphanRemovalDemo() {
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			Person person = new Person();
 			person.setFirstName("Orphan");
 			person.setLastName("Orphan");
@@ -67,7 +67,7 @@ public class OneToManyUnidirectionalDemo {
 	}
 
 	private static void selectFromPersonNplusOneProblem() {
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			String selectString = "from Person p"; // N+1
 //			String selectString = "from Person p left join fetch p.notes"; // fix N+1
 

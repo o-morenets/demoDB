@@ -3,15 +3,47 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="default">
+    <persistence-unit name="inheritance_unit">
+        <class>hibernate.entitymanager.inheritance.Animal</class>
+        <class>hibernate.entitymanager.inheritance.Pet</class>
+        <class>hibernate.entitymanager.inheritance.Cat</class>
+        <class>hibernate.entitymanager.inheritance.Dog</class>
+        <class>hibernate.entitymanager.inheritance.Fish</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5433/postgres"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5433/inheritance"/>
             <property name="hibernate.connection.username" value="postgres"/>
             <property name="hibernate.connection.password" value="postgres"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.highlight_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="relations_unit">
+        <class>hibernate.entitymanager.relations.many_to_many.Employee</class>
+        <class>hibernate.entitymanager.relations.many_to_many.Guild</class>
+        <class>hibernate.entitymanager.relations.many_to_one.Address</class>
+        <class>hibernate.entitymanager.relations.many_to_one.Office</class>
+        <class>hibernate.entitymanager.relations.one_to_many_bidirectional.Customer</class>
+        <class>hibernate.entitymanager.relations.one_to_many_bidirectional.Order</class>
+        <class>hibernate.entitymanager.relations.one_to_many_unidirectional.Note</class>
+        <class>hibernate.entitymanager.relations.one_to_many_unidirectional.Person</class>
+        <class>hibernate.entitymanager.relations.one_to_one.Address</class>
+        <class>hibernate.entitymanager.relations.one_to_one.AddressEmbeddable</class>
+        <class>hibernate.entitymanager.relations.one_to_one.Message</class>
+        <class>hibernate.entitymanager.relations.one_to_one.Photo</class>
+        <class>hibernate.entitymanager.relations.one_to_one.Profile</class>
+        <class>hibernate.entitymanager.relations.one_to_one.User</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5433/relations"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="postgres"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

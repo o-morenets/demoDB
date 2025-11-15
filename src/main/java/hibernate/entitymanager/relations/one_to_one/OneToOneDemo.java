@@ -1,7 +1,7 @@
 package hibernate.entitymanager.relations.one_to_one;
 
 
-import hibernate.entitymanager.EntityManagerUtils;
+import hibernate.entitymanager.relations.EntityManagerUtilsRelations;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class OneToOneDemo {
 	}
 
 	private static void insertUserWithAddress() {
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			User user = new User();
 			user.setFirstName("Garry");
 			user.setLastName("Moore");
@@ -31,7 +31,7 @@ public class OneToOneDemo {
 	}
 
 	private static void insertUserWithProfile() {
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			User user = new User();
 			user.setFirstName("John");
 			user.setLastName("Lennon");
@@ -73,7 +73,7 @@ public class OneToOneDemo {
 	}
 
 	private static void insertUserWithElementCollection() {
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			User user = new User();
 			user.setFirstName("Martin");
 			user.setLastName("Wood");

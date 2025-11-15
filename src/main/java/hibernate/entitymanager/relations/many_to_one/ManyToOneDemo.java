@@ -1,11 +1,12 @@
 package hibernate.entitymanager.relations.many_to_one;
 
-import hibernate.entitymanager.EntityManagerUtils;
+
+import hibernate.entitymanager.relations.EntityManagerUtilsRelations;
 
 public class ManyToOneDemo {
 
 	public static void main(String[] args) {
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 			Address address = new Address();
 			address.setStreet("Nova");
 			address.setZip(99999);

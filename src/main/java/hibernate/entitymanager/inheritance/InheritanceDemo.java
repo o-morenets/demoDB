@@ -1,7 +1,5 @@
 package hibernate.entitymanager.inheritance;
 
-import hibernate.entitymanager.EntityManagerUtils;
-
 import java.awt.*;
 import java.util.List;
 
@@ -9,7 +7,7 @@ public class InheritanceDemo {
 
 	public static void main(String[] args) {
 
-		EntityManagerUtils.doInEntityManagerPersistentContext(em -> {
+		EntityManagerUtilsInheritance.doInEntityManagerInheritance(em -> {
 
 			Animal animalPet = new Pet();
 			animalPet.setColor(Color.GRAY);
