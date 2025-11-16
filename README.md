@@ -33,11 +33,11 @@ Run `docker compose up` - creates `MySQL` (port:`3307`) and `PostgreSQL` (potr:`
 
 ### `jdbc:mysql://localhost:3307/isolation-levels`
 
-#### [Dirty Read](src/main/java/jdbc/isolation_levels/dirtyread/DirtyReadExample.java)
+#### [Dirty Read](src/main/java/jdbc/isolation_levels/_01_dirty_read/DirtyReadExample.java)
 
-#### [Non-Repeatable Read](src/main/java/jdbc/isolation_levels/nonrepeatableread/NonRepeatableReadExample.java)
+#### [Non-Repeatable Read](src/main/java/jdbc/isolation_levels/_02_repeatable_read/NonRepeatableReadExample.java)
 
-#### [Phantom Read](src/main/java/jdbc/isolation_levels/phantomread/PhantomReadExample.java)
+#### [Phantom Read](src/main/java/jdbc/isolation_levels/_03_phantom_read/PhantomReadExample.java)
 
 
 ## 🦾 High load DB Simulation:

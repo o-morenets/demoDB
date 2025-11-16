@@ -1,4 +1,4 @@
-package jdbc.isolation_levels.dirtyread;
+package jdbc.isolation_levels._01_dirty_read;
 
 import jdbc.isolation_levels.MySqlConnection;
 

@@ -1,4 +1,4 @@
-package jdbc.isolation_levels.nonrepeatableread;
+package jdbc.isolation_levels._02_repeatable_read;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

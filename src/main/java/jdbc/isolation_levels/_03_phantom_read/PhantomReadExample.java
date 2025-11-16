@@ -1,4 +1,4 @@
-package jdbc.isolation_levels.phantomread;
+package jdbc.isolation_levels._03_phantom_read;
 
 import jdbc.isolation_levels.MySqlConnection;
 

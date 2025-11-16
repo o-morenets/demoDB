@@ -1,4 +1,4 @@
-package jdbc.isolation_levels.nonrepeatableread;
+package jdbc.isolation_levels._02_repeatable_read;
 
 import jdbc.isolation_levels.MySqlConnection;
 
@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class NonRepeatableReadExample {
+public class RepeatableReadExample {
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -33,7 +33,7 @@ public class NonRepeatableReadExample {
         // restore the previous value of an account type
         System.out.println("Restoring the previous value of an account type...");
         Connection connection = MySqlConnection.getConnection();
-        try (PreparedStatement stmt = connection.prepareStatement("update accounts set balance = 100 where id = 1")) {
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE accounts SET balance = 100 WHERE id = 1")) {
             stmt.executeUpdate();
             connection.close();
         } catch (SQLException e) {
