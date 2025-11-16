@@ -22,7 +22,7 @@ public class Inserter implements Runnable {
 		System.out.println("Inserting values...");
 		try (PreparedStatement stmt = conn.prepareStatement(QUERY)) {
             stmt.setString(1, "CHECKING");
-            stmt.setDouble(2, 5000.00d);
+            stmt.setDouble(2, 5000d);
 
 			stmt.execute();
 			conn.commit();

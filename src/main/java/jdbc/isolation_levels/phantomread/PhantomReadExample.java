@@ -1,6 +1,6 @@
 package jdbc.isolation_levels.phantomread;
 
-import jdbc.utils.MySqlConnection;
+import jdbc.isolation_levels.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

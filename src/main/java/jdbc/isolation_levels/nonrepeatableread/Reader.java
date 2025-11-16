@@ -26,10 +26,7 @@ public class Reader implements Runnable {
 		try (PreparedStatement stmt = conn.prepareStatement(QUERY)) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				System.out.println("Account details: " +
-                        rs.getInt(1) + " - " +
-                        rs.getString(2)
-                );
+				System.out.println("Account balance: " + rs.getDouble("balance"));
 			}
 
 			TimeUnit.SECONDS.sleep(3);
@@ -38,10 +35,7 @@ public class Reader implements Runnable {
 
 			rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println("Account details: " +
-                        rs.getInt(1) + " - " +
-                        rs.getString(2)
-                );
+                System.out.println("Account balance: " + rs.getDouble("balance"));
             }
 
 			rs.close();

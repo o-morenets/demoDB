@@ -34,15 +34,6 @@ public class Employees {
         connection.close();
     }
 
-    @SneakyThrows
-    private static Connection getConnection() {
-        String url = "jdbc:mysql://localhost:3306/employees";
-        String user = "root";
-        String password = "root";
-
-        return DriverManager.getConnection(url, user, password);
-    }
-
     private static Runnable query(Connection conn) {
         return () -> {
             String QUERY = """
@@ -64,5 +55,14 @@ public class Employees {
 
             System.out.println(Thread.currentThread().getName() + ": " + (System.nanoTime() - start) / 1_000_000_000.0);
         };
+    }
+
+    @SneakyThrows
+    private static Connection getConnection() {
+        String url = "jdbc:mysql://localhost:3306/employees";
+        String user = "root";
+        String password = "root";
+
+        return DriverManager.getConnection(url, user, password);
     }
 }

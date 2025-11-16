@@ -12,7 +12,7 @@ public class Updater implements Runnable {
 
     private final Connection conn;
 
-    private static final String QUERY = "update accounts set balance = balance - 10 where id = 1";
+    private static final String QUERY = "update accounts set balance = balance + 500 where id = 1";
 
     public Updater(Connection conn) {
         this.conn = conn;

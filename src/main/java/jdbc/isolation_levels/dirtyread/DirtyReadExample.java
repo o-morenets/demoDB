@@ -1,6 +1,6 @@
 package jdbc.isolation_levels.dirtyread;
 
-import jdbc.utils.MySqlConnection;
+import jdbc.isolation_levels.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -37,5 +37,4 @@ public class DirtyReadExample {
 		}
 		readerThread.start();
 	}
-
 }
