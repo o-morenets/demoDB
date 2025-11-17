@@ -33,7 +33,7 @@ public class RealDirtyReadDemo {
                     Connection connection = MySqlConnection.getConnection();
                     PreparedStatement stmt = connection.prepareStatement("SELECT balance FROM accounts WHERE id = 1")
             ) {
-                connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+                connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 
                 int count = 0;
 
