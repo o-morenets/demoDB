@@ -9,8 +9,9 @@ import lombok.Data;
 public class Profile {
 
 	@Id
-//	@GeneratedValue // don't need it as we will use User's id. The primary key of Profile is automatically set from the User entity.
-	//	We use @MapsId on User field
+//	@GeneratedValue // don't need it as we will use User's id.
+//	The primary key of Profile is automatically set from the User entity.
+// 	We use @MapsId on User field
 	private Long id;
 
 	private boolean active;
@@ -19,7 +20,6 @@ public class Profile {
 
 	@OneToOne
 	@MapsId // Maps the id of Profile to the id of User. Means that, apart from Foreign Key, it is treated as id
-	@JoinColumn(name = "user_id") // default 'user_message_id'
 	private User user;
 
 	@Embedded

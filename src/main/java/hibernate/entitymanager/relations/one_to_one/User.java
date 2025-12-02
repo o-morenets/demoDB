@@ -27,11 +27,9 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Profile profile;
 
-	@OneToOne
+	@OneToOne // no 'mappedBy', so this is owning side
+    @JoinColumn(name = "msg_id") // name of FK, default - 'message_id'
 	private Message message;
-
-	@OneToOne
-	private Photo photo;
 
 	@ElementCollection
 	private Collection<Float> floats = new ArrayList<>();

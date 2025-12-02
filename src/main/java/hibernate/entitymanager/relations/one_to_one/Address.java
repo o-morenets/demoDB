@@ -21,6 +21,5 @@ public class Address {
 	private String apt;
 
 	@OneToOne
-	@JoinColumn(name = "user_id") // default 'user_message_id'
 	private User user;
 }

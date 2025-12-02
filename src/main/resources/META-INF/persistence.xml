@@ -32,7 +32,6 @@
         <class>hibernate.entitymanager.relations.one_to_one.Address</class>
         <class>hibernate.entitymanager.relations.one_to_one.AddressEmbeddable</class>
         <class>hibernate.entitymanager.relations.one_to_one.Message</class>
-        <class>hibernate.entitymanager.relations.one_to_one.Photo</class>
         <class>hibernate.entitymanager.relations.one_to_one.Profile</class>
         <class>hibernate.entitymanager.relations.one_to_one.User</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
