@@ -15,9 +15,14 @@ import java.util.stream.Stream;
 public class OneToManyUnidirectionalDemo {
 
 	public static void main(String[] args) {
+        System.out.println("Saving Person with Notes");
 		persistPersonWithNotes();
+
+        System.out.println("Orphan removal");
 		orphanRemovalDemo();
-		selectFromPersonNplusOneProblem();
+
+        System.out.println("1 + N");
+        selectFromPersonOnePlusNProblem();
 	}
 
 	private static void persistPersonWithNotes() {
@@ -29,11 +34,11 @@ public class OneToManyUnidirectionalDemo {
 
 			Note note1 = new Note();
 			note1.setBody("Body 1");
-			em.persist(note1);
+//			em.persist(note1); // not needed, as cascade = CascadeType.ALL in Person
 
 			Note note2 = new Note();
 			note2.setBody("Body 2");
-			em.persist(note2);
+//			em.persist(note2); // not needed, as cascade = CascadeType.ALL in Person
 
 			person.setNotes(List.of(note1, note2)); // set notes on person's side
 
@@ -60,16 +65,17 @@ public class OneToManyUnidirectionalDemo {
 
 			for (int i = 0; i < 10; i++) {
 				if (i % 3 == 0) {
+                    System.out.println("Setting null to person " + i);
 					notesList.set(i, null); // <-- should be removed from db table
 				}
 			}
 		});
 	}
 
-	private static void selectFromPersonNplusOneProblem() {
+	private static void selectFromPersonOnePlusNProblem() {
 		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-			String selectString = "from Person p"; // N+1
-//			String selectString = "from Person p left join fetch p.notes"; // fix N+1
+			String selectString = "from Person p"; // 1 + N
+//			String selectString = "from Person p left join fetch p.notes"; // fix 1 + N
 
 			em.createQuery(selectString, Person.class)
 					.getResultStream()
