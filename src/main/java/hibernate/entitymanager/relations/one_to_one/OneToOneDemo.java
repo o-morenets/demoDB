@@ -10,7 +10,6 @@ public class OneToOneDemo {
 	public static void main(String[] args) {
 		insertUserWithAddress();
 		insertUserWithProfile();
-		insertUserWithElementCollection();
 	}
 
 	private static void insertUserWithAddress() {
@@ -69,16 +68,6 @@ public class OneToOneDemo {
 			profileWithEmbeddedAddress.setAddress(address);
 
 			user1.setProfile(profileWithEmbeddedAddress);
-		});
-	}
-
-	private static void insertUserWithElementCollection() {
-		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-			User user = new User();
-			user.setFirstName("Martin");
-			user.setLastName("Wood");
-			user.getFloats().addAll(List.of(123.453f, -987.65f, 0.00054f));
-			em.persist(user);
 		});
 	}
 }

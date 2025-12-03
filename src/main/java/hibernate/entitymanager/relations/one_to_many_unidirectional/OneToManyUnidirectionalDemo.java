@@ -14,72 +14,85 @@ import java.util.stream.Stream;
  */
 public class OneToManyUnidirectionalDemo {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("Saving Person with Notes");
-		persistPersonWithNotes();
+        persistPersonWithNotes();
+
+        System.out.println("ElementCollection example");
+        insertPersonWithElementCollection();
 
         System.out.println("Orphan removal");
-		orphanRemovalDemo();
+        orphanRemovalDemo();
 
         System.out.println("1 + N");
         selectFromPersonOnePlusNProblem();
-	}
+    }
 
-	private static void persistPersonWithNotes() {
-		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-			Person person = new Person();
-			person.setFirstName("John");
-			person.setLastName("Bush");
-			em.persist(person);
+    private static void persistPersonWithNotes() {
+        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
+            Person person = new Person();
+            person.setFirstName("John");
+            person.setLastName("Bush");
+            em.persist(person);
 
-			Note note1 = new Note();
-			note1.setBody("Body 1");
+            Note note1 = new Note();
+            note1.setBody("Body 1");
 //			em.persist(note1); // not needed, as cascade = CascadeType.ALL in Person
 
-			Note note2 = new Note();
-			note2.setBody("Body 2");
+            Note note2 = new Note();
+            note2.setBody("Body 2");
 //			em.persist(note2); // not needed, as cascade = CascadeType.ALL in Person
 
-			person.setNotes(List.of(note1, note2)); // set notes on person's side
+            person.setNotes(List.of(note1, note2)); // set notes on person's side
 
-			// Person is in persistent state, so it saves all notes, that were already persisted above
-		});
-	}
+            // Person is in persistent state, so it saves all notes, that were already persisted above
+        });
+    }
 
-	private static void orphanRemovalDemo() {
-		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-			Person person = new Person();
-			person.setFirstName("Orphan");
-			person.setLastName("Orphan");
-			em.persist(person);
+    private static void insertPersonWithElementCollection() {
+        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
+            Person person = new Person();
+            person.setFirstName("Martin");
+            person.setLastName("Wood");
+            person.getFloats().addAll(List.of(123.453f, -987.65f, 0.00054f));
+            em.persist(person);
+        });
+    }
 
-			List<Note> notesList = Stream.generate(() -> {
-						Note newNote = new Note();
-						newNote.setBody("Body " + UUID.randomUUID());
-						return newNote;
-					})
-					.limit(10)
-					.collect(Collectors.toList());
+    private static void orphanRemovalDemo() {
+        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
+            Person person = new Person();
+            person.setFirstName("Orphan");
+            person.setLastName("Orphan");
+            em.persist(person);
 
-			person.setNotes(notesList);
+            List<Note> notesList = Stream.generate(() -> {
+                        Note newNote = new Note();
+                        newNote.setBody("Body " + UUID.randomUUID());
+                        return newNote;
+                    })
+                    .limit(10)
+                    .collect(Collectors.toList());
 
-			for (int i = 0; i < 10; i++) {
-				if (i % 3 == 0) {
+            person.setNotes(notesList);
+
+            for (int i = 0; i < 10; i++) {
+                if (i % 3 == 0) {
                     System.out.println("Setting null to person " + i);
-					notesList.set(i, null); // <-- should be removed from db table
-				}
-			}
-		});
-	}
+                    notesList.set(i, null); // <-- should be removed from db table
+                }
+            }
+        });
+    }
 
-	private static void selectFromPersonOnePlusNProblem() {
-		EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-			String selectString = "from Person p"; // 1 + N
+    private static void selectFromPersonOnePlusNProblem() {
+        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
+            String selectString = "from Person p"; // 1 + N
 //			String selectString = "from Person p left join fetch p.notes"; // fix 1 + N
 
-			em.createQuery(selectString, Person.class)
-					.getResultStream()
-					.forEach(person -> System.out.println(person.getId() + ": " + person.getNotes()));
-		});
-	}
+            em.createQuery(selectString, Person.class)
+                    .getResultStream()
+                    .forEach(person -> System.out.println(person.getId() + ": " + person.getNotes()));
+        });
+    }
 }

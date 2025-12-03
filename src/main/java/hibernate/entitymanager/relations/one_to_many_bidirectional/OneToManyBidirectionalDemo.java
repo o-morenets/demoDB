@@ -6,7 +6,7 @@ public class OneToManyBidirectionalDemo {
 
     public static void main(String[] args) {
         insertCustomerWithOrdersPostgres();
-        selectFromPersonNplusOneProblem();
+        selectFromPersonOnePlusNProblem();
     }
 
     /**
@@ -36,7 +36,9 @@ public class OneToManyBidirectionalDemo {
             Order order2 = new Order();
             order2.setDescription("Order 2");
             order2.setAmount(350.00);
-            customer1.addOrder(order2); // use helper method
+            // not using helper method:
+            order2.setCustomer(customer1); // when no customer set, FK will be null
+            customer1.getOrders().add(order2); // when no order is added, it will be NOT saved to DB
 
             Order order3 = new Order();
             order3.setDescription("Order 3");
@@ -62,11 +64,11 @@ public class OneToManyBidirectionalDemo {
         });
     }
 
-    private static void selectFromPersonNplusOneProblem() {
+    private static void selectFromPersonOnePlusNProblem() {
         EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
 
-//			String selectString = "from Customer"; // N+1
-            String selectString = "select distinct c from Customer c left join fetch c.orders"; // fix N+1
+//			String selectString = "from Customer"; // 1 + N
+            String selectString = "select distinct c from Customer c left join fetch c.orders"; // fix 1 + N
 
             em.createQuery(selectString, Customer.class)
                     .getResultList()

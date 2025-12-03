@@ -21,5 +21,6 @@ public class Address {
 	private String apt;
 
 	@OneToOne
+    @JoinColumn(name = "usr_fk")
 	private User user;
 }

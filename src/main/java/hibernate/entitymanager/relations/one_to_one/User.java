@@ -11,38 +11,35 @@ import java.util.Collection;
 @Data
 public class User {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	@Column(name = "first_name")
-	private String firstName;
+    @Column(name = "first_name")
+    private String firstName;
 
-	@Column(name = "last_name")
-	private String lastName;
+    @Column(name = "last_name")
+    private String lastName;
 
-	@OneToOne(mappedBy = "user")
-	private Address address;
+    @OneToOne(mappedBy = "user")
+    private Address address;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private Profile profile;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
 
-	@OneToOne // no 'mappedBy', so this is owning side
+    @OneToOne // no 'mappedBy', so this is owning side
     @JoinColumn(name = "msg_id") // name of FK, default - 'message_id'
-	private Message message;
+    private Message message;
 
-	@ElementCollection
-	private Collection<Float> floats = new ArrayList<>();
+    // helper method for address
+    public void setAddress(Address address) {
+        address.setUser(this);
+        this.address = address;
+    }
 
-	// helper method for address
-	public void setAddress(Address address) {
-		address.setUser(this);
-		this.address = address;
-	}
-
-	// helper method for profile
-	public void setProfile(Profile profile) {
-		profile.setUser(this);
-		this.profile = profile;
-	}
+    // helper method for profile
+    public void setProfile(Profile profile) {
+        profile.setUser(this);
+        this.profile = profile;
+    }
 }
