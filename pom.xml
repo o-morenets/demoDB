@@ -60,7 +60,6 @@
                     </schemas>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
