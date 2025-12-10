@@ -27,7 +27,7 @@ public class Guild {
 
 	// helper method
 	public void addEmployee(Employee employee) {
-		employee.getGuilds().add(this);
 		employees.add(employee);
-	}
+        employee.getGuilds().add(this);
+    }
 }

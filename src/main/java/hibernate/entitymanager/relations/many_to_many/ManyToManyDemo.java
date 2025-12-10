@@ -19,7 +19,7 @@ public class ManyToManyDemo {
 
 			Guild guild = new Guild();
 			guild.setName("Back-end guild");
-			guild.addEmployee(employee);
+			guild.addEmployee(employee); // helper method
 
 			em.persist(guild);
 		});
@@ -31,7 +31,7 @@ public class ManyToManyDemo {
 			Employee empSamantaFox = new Employee();
 			empSamantaFox.setFirstName("Samanta");
 			empSamantaFox.setLastName("Fox");
-			guild.addEmployee(empSamantaFox);
+			guild.addEmployee(empSamantaFox); // helper method
 		});
 
 		// add new Guild to existing Employee
@@ -40,10 +40,12 @@ public class ManyToManyDemo {
 
 			Guild guild = new Guild();
 			guild.setName("Designers guild");
+
 			// we can create another helper method on employee's side OR use one on Guild's side
 //			employee.getGuilds().add(guild);
 //			guild.getEmployees().add(employee);
-			guild.addEmployee(employee);
+            // OR
+			guild.addEmployee(employee); // helper method
 
 //			em.persist(guild); // we have CascadeType on Employee side
 		});
