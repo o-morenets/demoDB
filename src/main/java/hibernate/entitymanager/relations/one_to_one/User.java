@@ -3,9 +3,6 @@ package hibernate.entitymanager.relations.one_to_one;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 @Entity
 @Table(name = "usr") // because 'user' is a reserved word in Postgres
 @Data
@@ -26,10 +23,6 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Profile profile;
-
-    @OneToOne // no 'mappedBy', so this is owning side
-    @JoinColumn(name = "msg_id") // name of FK, default - 'message_id'
-    private Message message;
 
     // helper method for address
     public void setAddress(Address address) {

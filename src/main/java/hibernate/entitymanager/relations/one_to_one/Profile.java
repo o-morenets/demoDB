@@ -18,7 +18,7 @@ public class Profile {
 
 	private String photoUrl;
 
-	@OneToOne
+	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	@MapsId // Maps the id of Profile to the id of User. Means that, apart from Foreign Key, it is treated as id
 	private User user;
 
