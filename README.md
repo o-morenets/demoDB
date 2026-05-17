@@ -35,7 +35,7 @@ Run `docker compose up` - creates `MySQL` (port:`3307`) and `PostgreSQL` (potr:`
 
 #### [Dirty Read](src/main/java/jdbc/isolation_levels/_01_dirty_read/DirtyReadExample.java)
 
-#### [Non-Repeatable Read](src/main/java/jdbc/isolation_levels/_02_repeatable_read/NonRepeatableReadExample.java)
+#### [Non-Repeatable Read](src/main/java/jdbc/isolation_levels/_02_repeatable_read/RepeatableReadExample.java)
 
 #### [Phantom Read](src/main/java/jdbc/isolation_levels/_03_phantom_read/PhantomReadExample.java)
 
@@ -73,10 +73,10 @@ Run `docker compose up` - creates `MySQL` (port:`3307`) and `PostgreSQL` (potr:`
 - used entities: `Address`, `Office`
 
 #### [OneToManyUnidirectionalDemo](src/main/java/hibernate/entitymanager/relations/one_to_many_unidirectional/OneToManyUnidirectionalDemo.java)
-- used entities: `Person`, `Note`
+- used entities: `Customer`, `Order`
 
 #### [OneToManyBidirectionalDemo](src/main/java/hibernate/entitymanager/relations/one_to_many_bidirectional/OneToManyBidirectionalDemo.java)
-- used entities: `Customer`, `Order`
+- used entities: `Person`, `Note`
 
 #### [OneToOneDemo](src/main/java/hibernate/entitymanager/relations/one_to_one/OneToOneDemo.java)
 - used entities: `User`, `Address`, `Profile`, `Photo`, `Message`, `AddressEmbeddable`

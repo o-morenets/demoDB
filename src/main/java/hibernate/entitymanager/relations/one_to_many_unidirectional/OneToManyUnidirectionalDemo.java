@@ -2,97 +2,92 @@ package hibernate.entitymanager.relations.one_to_many_unidirectional;
 
 import hibernate.entitymanager.relations.EntityManagerUtilsRelations;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-/**
- * One-To-Many
- * Unidirectional One-to-Many association
- * (Note doesn't "know" about Person)
- */
 public class OneToManyUnidirectionalDemo {
 
     public static void main(String[] args) {
-        System.out.println("Saving Person with Notes");
-        persistPersonWithNotes();
 
-        System.out.println("ElementCollection example");
-        insertPersonWithElementCollection();
+        System.out.println("Saving Customers with Orders");
+        persistCustomersWithOrders();
 
-        System.out.println("Orphan removal");
-        orphanRemovalDemo();
-
-        System.out.println("1 + N");
+        System.out.println("1 + N problem example");
         selectFromPersonOnePlusNProblem();
     }
 
-    private static void persistPersonWithNotes() {
+    /**
+     * One-To-Many
+     * Unidirectional (Order doesn't "know" about Customer)
+     */
+    private static void persistCustomersWithOrders() {
         EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-            Person person = new Person();
-            person.setFirstName("John");
-            person.setLastName("Bush");
-            em.persist(person);
 
-            Note note1 = new Note();
-            note1.setBody("Body 1");
-//			em.persist(note1); // not needed, as cascade = CascadeType.ALL in Person
+            // Create Customers
 
-            Note note2 = new Note();
-            note2.setBody("Body 2");
-//			em.persist(note2); // not needed, as cascade = CascadeType.ALL in Person
+            Customer customer1 = new Customer();
+            customer1.setName("Customer 1");
+            em.persist(customer1);
 
-            person.setNotes(List.of(note1, note2)); // set notes on person's side
+            Customer customer2 = new Customer();
+            customer2.setName("Customer 2");
+            em.persist(customer2);
 
-            // Person is in persistent state, so it saves all notes, that were already persisted above
-        });
-    }
+            Customer customer3 = new Customer();
+            customer3.setName("Customer 3");
+            em.persist(customer3);
 
-    private static void insertPersonWithElementCollection() {
-        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-            Person person = new Person();
-            person.setFirstName("Martin");
-            person.setLastName("Wood");
-            person.getFloats().addAll(List.of(123.453f, -987.65f, 0.00054f));
-            em.persist(person);
-        });
-    }
 
-    private static void orphanRemovalDemo() {
-        EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-            Person person = new Person();
-            person.setFirstName("Orphan");
-            person.setLastName("Orphan");
-            em.persist(person);
+            // Create Orders
 
-            List<Note> notesList = Stream.generate(() -> {
-                        Note newNote = new Note();
-                        newNote.setBody("Body " + UUID.randomUUID());
-                        return newNote;
-                    })
-                    .limit(10)
-                    .collect(Collectors.toList());
+            Order order1 = new Order();
+            order1.setDescription("Order 1");
+            order1.setAmount(200.00);
+            customer1.getOrders().add(order1);
+//			em.persist(order1); // don't need it when @OneToMany(..., cascade = CascadeType.ALL) on Customer's side
 
-            person.setNotes(notesList);
+            Order order2 = new Order();
+            order2.setDescription("Order 2");
+            order2.setAmount(350.00);
+//            customer1.getOrders().add(order2); // when no order is added, it will NOT be saved to DB
 
-            for (int i = 0; i < 10; i++) {
-                if (i % 3 == 0) {
-                    System.out.println("Setting null to person " + i);
-                    notesList.set(i, null); // <-- should be removed from db table
-                }
-            }
+            Order order3 = new Order();
+            order3.setDescription("Order 3");
+            order3.setAmount(100.00);
+            customer1.getOrders().add(order3);
+
+            Order order4 = new Order();
+            order4.setDescription("Order 4");
+            order4.setAmount(1000.00);
+            customer2.getOrders().add(order4);
+
+            Order order5 = new Order();
+            order5.setDescription("Order 5");
+            order5.setAmount(750.00);
+            customer3.getOrders().add(order5);
+
+            Order order6 = new Order();
+            order6.setDescription("Order 6");
+            order6.setAmount(600.00);
+            customer3.getOrders().add(order6);
+
+            // Customers are in persistent state, so all related Orders also will be saved
+
+            // IMPORTANT NOTE for unidirectional relationships
+            // In Unidirectional relationship, firstly child entity will be inserted with FK == null
+            // as child doesn't know about its parent
+            // and then, child entity will be updated with FK:
+            // [Hibernate] insert into order_details (amount,description) values (?,?)
+            // [Hibernate] update order_details set customer_id=? where id=?
         });
     }
 
     private static void selectFromPersonOnePlusNProblem() {
         EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-            String selectString = "from Person p"; // 1 + N
-//			String selectString = "from Person p left join fetch p.notes"; // fix 1 + N
 
-            em.createQuery(selectString, Person.class)
-                    .getResultStream()
-                    .forEach(person -> System.out.println(person.getId() + ": " + person.getNotes()));
+//			String selectString = "from Customer"; // 1 + N
+            String selectString = "select distinct c from Customer c left join fetch c.orders"; // fix 1 + N
+
+            em.createQuery(selectString, Customer.class)
+                    .getResultList()
+                    .forEach(customer -> System.out.println("Customer #" + customer.getId() + ": " + customer.getOrders()));
         });
     }
 }

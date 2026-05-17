@@ -1,4 +1,4 @@
-package hibernate.entitymanager.relations.one_to_many_unidirectional;
+package hibernate.entitymanager.relations.one_to_many_bidirectional;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,9 +22,8 @@ public class Person {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "person_id")
-    private List<Note> notes;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Note> notes = new ArrayList<>();
 
     /**
      * Creates unidirectional OneToMany relation
@@ -36,4 +35,9 @@ public class Person {
             joinColumns = @JoinColumn(name = "p_id"))
     @Column(name = "float_value")
     private Collection<Float> floats = new ArrayList<>();
+
+    public void addNote(Note note) {
+        note.setPerson(this);
+        notes.add(note);
+    }
 }

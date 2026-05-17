@@ -25,10 +25,10 @@
         <class>hibernate.entitymanager.relations.many_to_many.Guild</class>
         <class>hibernate.entitymanager.relations.many_to_one.Address</class>
         <class>hibernate.entitymanager.relations.many_to_one.Office</class>
-        <class>hibernate.entitymanager.relations.one_to_many_bidirectional.Customer</class>
-        <class>hibernate.entitymanager.relations.one_to_many_bidirectional.Order</class>
-        <class>hibernate.entitymanager.relations.one_to_many_unidirectional.Note</class>
-        <class>hibernate.entitymanager.relations.one_to_many_unidirectional.Person</class>
+        <class>hibernate.entitymanager.relations.one_to_many_unidirectional.Customer</class>
+        <class>hibernate.entitymanager.relations.one_to_many_unidirectional.Order</class>
+        <class>hibernate.entitymanager.relations.one_to_many_bidirectional.Note</class>
+        <class>hibernate.entitymanager.relations.one_to_many_bidirectional.Person</class>
         <class>hibernate.entitymanager.relations.one_to_one.Address</class>
         <class>hibernate.entitymanager.relations.one_to_one.AddressEmbeddable</class>
         <class>hibernate.entitymanager.relations.one_to_one.Message</class>

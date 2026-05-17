@@ -1,15 +1,11 @@
-package hibernate.entitymanager.relations.one_to_many_bidirectional;
+package hibernate.entitymanager.relations.one_to_many_unidirectional;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "order_details") // 'order' is a reserved word in Postgres
 @Data
-@ToString(exclude = "customer")
-@EqualsAndHashCode(exclude = "customer")
 public class Order {
 
     @Id
@@ -19,8 +15,4 @@ public class Order {
     private String description;
 
     private Double amount;
-
-    @ManyToOne
-    @JoinColumn(name = "cust_id")
-    private Customer customer;
 }
