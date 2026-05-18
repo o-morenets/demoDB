@@ -28,4 +28,9 @@ public class Employee {
 			joinColumns = @JoinColumn(name = "employee_id"),
 			inverseJoinColumns = @JoinColumn(name = "guild_id"))
 	private List<Guild> guilds = new ArrayList<>();
+
+	public Employee(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 }

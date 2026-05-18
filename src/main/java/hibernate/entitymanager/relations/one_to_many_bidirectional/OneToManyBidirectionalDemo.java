@@ -40,9 +40,7 @@ public class OneToManyBidirectionalDemo {
 
     private static void persistNewPersonWithNewNote() {
         EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-            Person person = new Person();
-            person.setFirstName("John");
-            person.setLastName("Bush");
+            Person person = new Person("John", "Doe");
             em.persist(person);
 
             Note note = new Note("Hello!");
@@ -84,9 +82,7 @@ public class OneToManyBidirectionalDemo {
 
     private static void persistPersonWithElementCollection() {
         EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-            Person person = new Person();
-            person.setFirstName("Martin");
-            person.setLastName("Wood");
+            Person person = new Person("Martin", "Fowler");
             person.getFloats().addAll(List.of(123.453f, -987.65f, 0.00054f));
             em.persist(person);
         });
@@ -94,12 +90,10 @@ public class OneToManyBidirectionalDemo {
 
     private static void orphanRemovalDemo() {
         EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
-            // 1. Створюємо Person
-            Person person = new Person();
-            person.setFirstName("Orphan");
-            person.setLastName("Orphan");
+            // 1. Create Person
+            Person person = new Person("Orphan", "Orphan");
 
-            // 2. Генеруємо та додаємо 10 нотаток (БЕЗ null елементів)
+            // 2. Generate and add 10 Notes (WITHOUT null elements)
             List<Note> transientNotes = Stream.generate(() -> {
                         Note newNote = new Note();
                         newNote.setBody("Body " + UUID.randomUUID());
@@ -108,36 +102,35 @@ public class OneToManyBidirectionalDemo {
                     .limit(10)
                     .toList();
 
-            // Безпечно додаємо через хелпер-метод
+            // Add Notes using helper method
             transientNotes.forEach(person::addNote);
 
-            // Зберігаємо person разом з нотатками (завдяки CascadeType.ALL)
+            // Save person with Notes (due to CascadeType.ALL)
             em.persist(person);
 
-            // Синхронізуємо стан з базою даних, щоб Hibernate зафіксував insert-и
+            // Synchronize state with DB, so Hibernate fixes inserts
             em.flush();
-            System.out.println("--- Спочатку збережено 10 нотаток ---");
+            System.out.println("--- Firstly, save 10 notes ---");
 
-            // 3. Демонструємо orphanRemoval
-            // Отримуємо колекцію, яка вже контролюється Hibernate (PersistentBag)
+            // 3. orphanRemoval
+            // Get collection which is already managed by Hibernate (PersistentBag)
             List<Note> managedNotes = person.getNotes();
 
-            // Видаляємо кожну третю нотатку з КІНЦЯ списку,
-            // щоб не зламати індекси під час видалення
+            // Remove each 3rd Note from the end of list, to not corrupt indexes while removing
             for (int i = managedNotes.size() - 1; i >= 0; i--) {
                 if (i % 3 == 0) {
                     System.out.println("Removing note at index " + i + " from person");
 
-                    // Видаляємо саме з колекції сутності!
+                    // Remove from entities!
                     managedNotes.remove(i);
                 }
             }
 
-            // 4. Знову викликаємо flush, щоб побачити SQL DELETE в консолі
-            System.out.println("--- Викликаємо flush для orphanRemoval ---");
+            // 4. Invoke flush again to see SQL DELETE in console
+            System.out.println("--- Invoke flush for orphanRemoval ---");
             em.flush();
 
-            // Тут Hibernate автоматично виконає DELETE для видалених з колекції нотаток
+            // Here, Hibernate automatically performs DELETE for Notes that were removed from entities-collection
         });
     }
 
@@ -145,10 +138,21 @@ public class OneToManyBidirectionalDemo {
         EntityManagerUtilsRelations.doInEntityManagerRelations(em -> {
             String selectString = "from Person p"; // 1 + N
 //			String selectString = "from Person p left join fetch p.notes"; // fix 1 + N
+            // we can omit 'left' if we don't need persons without notes
+            // (or we are sure that all persons have at least one note)
 
-            em.createQuery(selectString, Person.class)
-                    .getResultStream()
-                    .forEach(person -> System.out.println(person.getId() + ": " + person.getNotes()));
+            System.out.println("Selecting Person from Person p...");
+            List<Person> resultList = em.createQuery(selectString, Person.class).getResultList();
+            System.out.println("ResultList of Person was loaded");
+            resultList.forEach(person -> System.out.println(person.getId() + ": " + person.getNotes()));
+
+            // ---------------------------------------------------------------------------------------------------------
+            // if fetchType=EAGER AND hibernate creates SQL query itself (like for find() method),
+            // then it fetches all in one query using left join
+            em.clear();
+            System.out.println("------------------------------ Notes for Person with ID=1:");
+            Person person = em.find(Person.class, 1L);
+            person.getNotes().forEach(note -> System.out.println(note.getId() + ": " + note.getBody()));
         });
     }
 }

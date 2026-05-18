@@ -2,10 +2,12 @@ package hibernate.entitymanager.relations.one_to_one;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usr") // because 'user' is a reserved word in Postgres
 @Data
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -23,6 +25,11 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Profile profile;
+
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     // helper method for address
     public void setAddress(Address address) {

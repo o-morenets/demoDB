@@ -30,4 +30,8 @@ public class Guild {
 		employees.add(employee);
         employee.getGuilds().add(this);
     }
+
+	public Guild(String name) {
+		this.name = name;
+	}
 }

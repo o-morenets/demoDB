@@ -2,10 +2,12 @@ package hibernate.entitymanager.relations.one_to_one;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usr_profile")
 @Data
+@NoArgsConstructor
 public class Profile {
 
 	@Id
@@ -35,4 +37,8 @@ public class Profile {
 	})
 	private AddressEmbeddable officeAddress;
 
+	public Profile(boolean active, String photoUrl) {
+		this.active = active;
+		this.photoUrl = photoUrl;
+	}
 }
